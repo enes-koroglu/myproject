@@ -1,1 +1,164 @@
+# OTOPARK OTOMASYONU – C++ PROJE RAPORU
+
+## 1. Projenin Amacı
+
+Bu projenin amacı, **nesne yönelimli programlama (OOP)** prensipleri kullanılarak bir **otopark otomasyon sistemi** geliştirmektir. Sistem; araç giriş-çıkış işlemlerini yönetir, otopark kapasitesini kontrol eder, araçların otoparkta kaldığı süreye göre **otomatik ücret hesaplaması** yapar ve kullanıcıya detaylı bir fiş sunar.
+
+Proje eğitim amaçlıdır ve özellikle şu konuları pekiştirmeyi hedefler:
+
+* Kalıtım (Inheritance)
+* Çok biçimlilik (Polymorphism)
+* Soyut sınıflar (Abstract Classes)
+* Dinamik bellek yönetimi
+* Zaman hesaplamaları
+* Giriş doğrulama (Input Validation)
+
+---
+
+## 2. Kullanılan Teknolojiler
+
+* **Programlama Dili:** C++
+* **Standart Kütüphaneler:**
+
+  * `<iostream>` : Giriş / çıkış işlemleri
+  * `<vector>` : Dinamik araç listesi yönetimi
+  * `<string>` : Metin işlemleri
+  * `<ctime>` : Zaman hesaplamaları
+  * `<limits>` : Giriş hatalarını temizleme
+
+---
+
+## 3. Genel Sistem Yapısı
+
+Sistem üç ana bölümden oluşmaktadır:
+
+1. **Vehicle (Araç) – Base Class**
+2. **Car, Motorbike, Truck – Derived Classes**
+3. **ParkingLot – Otopark Yönetim Sınıfı**
+
+Ana program (`main`) kullanıcıdan aldığı seçimlere göre bu sınıfları kullanarak sistemi yönetir.
+
+---
+
+## 4. Sınıfların Detaylı İncelenmesi
+
+### 4.1 Vehicle (Ana Sınıf)
+
+Vehicle sınıfı, tüm araç türleri için ortak olan özellikleri tanımlar.
+
+**Özellikler (Protected):**
+
+* `licensePlate` : Araç plakası
+* `type` : Araç türü
+* `entryTime` : Otoparka giriş zamanı
+
+**Metotlar:**
+
+* `calculateFee(int hours)` → Saf sanal fonksiyon
+* Getter fonksiyonları
+* Sanal yıkıcı (`virtual destructor`)
+
+Bu sınıf **soyut sınıf** olarak tasarlanmıştır ve doğrudan nesnesi oluşturulamaz.
+
+---
+
+### 4.2 Car, Motorbike, Truck (Alt Sınıflar)
+
+Bu sınıflar `Vehicle` sınıfından türetilmiştir ve `calculateFee()` fonksiyonunu kendi ücret tarifelerine göre uygularlar.
+
+| Araç Türü | Saatlik Ücret |
+| --------- | ------------- |
+| Araba     | 20 TL         |
+| Motor     | 10 TL         |
+| Kamyon    | 40 TL         |
+
+Bu yapı sayesinde **çok biçimlilik (polymorphism)** sağlanmıştır.
+
+---
+
+### 4.3 ParkingLot (Otopark Yönetimi)
+
+Otoparktaki tüm işlemleri yöneten ana sınıftır.
+
+**Özellikler:**
+
+* `vector<Vehicle*> parkedVehicles` : Park halindeki araçlar
+* `capacity` : Otopark kapasitesi
+
+**Temel Fonksiyonlar:**
+
+* `isFull()` : Otopark doluluk kontrolü
+* `isPlateExists()` : Aynı plakanın tekrar girişini engeller
+* `parkVehicle()` : Araç giriş işlemi
+* `leaveVehicle()` : Araç çıkış ve ücret hesaplama
+* `displayStatus()` : Otopark durumu görüntüleme
+
+---
+
+## 5. Zaman ve Ücret Hesaplama Mekanizması
+
+* Araç girişinde sistem zamanı kaydedilir
+* Çıkışta giriş ve çıkış zamanı arasındaki fark hesaplanır
+* **Simülasyon:** 1 saniye = 1 saat kabul edilmiştir
+* Minimum ücretlendirme süresi 1 saattir
+
+Bu yöntem test ve simülasyon için hızlı sonuç alınmasını sağlar.
+
+---
+
+## 6. Kullanıcı Arayüzü ve Menü Yapısı
+
+Program konsol tabanlı bir menü sunar:
+
+1. Araç Giriş
+2. Araç Çıkış (Otomatik Ödeme)
+3. Durum Göster
+4. Çıkış
+
+Tüm kullanıcı girişleri kontrol edilerek hatalı girişlerin programı bozması engellenmiştir.
+
+---
+
+## 7. Hata Kontrolleri ve Güvenlik
+
+* Sayı yerine harf girilmesi engellenmiştir
+* Otopark doluysa giriş yapılamaz
+* Aynı plaka ile ikinci kez giriş yapılamaz
+* Var olmayan araç için çıkış işlemi engellenir
+* Dinamik bellek kullanımı sonrası `delete` ile bellek temizliği yapılır
+
+---
+
+## 8. Nesne Yönelimli Programlama Açısından Değerlendirme
+
+Bu proje OOP prensiplerini başarılı şekilde uygular:
+
+* **Encapsulation:** Veriler sınıf içinde korunur
+* **Inheritance:** Araç türleri Vehicle sınıfından türetilmiştir
+* **Polymorphism:** Ücret hesaplama dinamik olarak yapılır
+* **Abstraction:** Vehicle sınıfı soyut yapıdadır
+
+---
+
+## 9. Geliştirilebilir Yönler
+
+* Dosyaya kayıt (günlük rapor alma)
+* Gerçek saat/dakika bazlı ücretlendirme
+* Kullanıcı giriş sistemi
+* GUI (grafik arayüz) entegrasyonu
+* Otopark kat sistemi
+
+---
+
+## 10. Sonuç
+
+Bu otopark otomasyon sistemi, C++ dilinde nesne yönelimli programlama kavramlarını uygulamak için kapsamlı ve öğretici bir örnektir. Gerçek hayattaki otopark sistemlerinin temel mantığını başarıyla simüle eder ve genişletilmeye uygundur.
+
+**Sonuç olarak**, proje hem akademik hem de pratik açıdan güçlü bir C++ uygulamasıdır.
+
+---
+
+**Hazırlayan:**
+
+**Tarih:**
 
