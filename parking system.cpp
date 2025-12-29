@@ -193,7 +193,7 @@ int main() {
             cout << "Plaka Giriniz: ";
             cin >> plate;
 
-            // --- YENI: AYNI PLAKA KONTROLU ---
+            //  AYNI PLAKA KONTROLU ---
             if (myLot.isPlateExists(plate)) {
                 cout << "HATA: " << plate << " plakali arac zaten otoparkta!" << endl;
                 continue; // Menuye don
