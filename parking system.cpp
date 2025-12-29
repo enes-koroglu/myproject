@@ -160,7 +160,7 @@ public:
 
 // --- MAIN (ANA PROGRAM) ---
 int main() {
-    ParkingLot myLot(20); // 5 araclik otopark
+    ParkingLot myLot(20); // 20 araclik otopark
     int choice;
 
     while (true) {
