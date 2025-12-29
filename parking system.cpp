@@ -66,7 +66,7 @@ public:
         return parkedVehicles.size() >= capacity;
     }
 
-    // YENI EKLENEN: Ayni plaka iceride var mi kontrolu
+    // Ayni plaka iceride var mi kontrolu
     bool isPlateExists(string plateToCheck) {
         for (size_t i = 0; i < parkedVehicles.size(); i++) {
             if (parkedVehicles[i]->getLicensePlate() == plateToCheck) {
@@ -160,7 +160,7 @@ public:
 
 // --- MAIN (ANA PROGRAM) ---
 int main() {
-    ParkingLot myLot(5); // 5 araclik otopark
+    ParkingLot myLot(20); // 5 araclik otopark
     int choice;
 
     while (true) {
